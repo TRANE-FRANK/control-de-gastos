@@ -8,8 +8,9 @@ export default function BudgetTracker() {
   const percentage = +((totalExpenses / state.budget) * 100).toFixed(2)
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <div className="flex justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-4 sm:p-6">
+      {/* Progreso Circular */}
+      <div className="flex justify-center mx-auto">
         <CircularProgressbar
           value={percentage}
           styles={buildStyles({
@@ -21,7 +22,9 @@ export default function BudgetTracker() {
           text={`${percentage}% Gastado`}
         />
       </div>
-      <div className="flex flex-col justify-center items-center gap-8">
+
+      {/* Información del presupuesto */}
+      <div className="flex flex-col justify-center items-center mx-auto gap-4 sm:gap-6">
         <button
           className="bg-slate-700 hover:bg-slate-600 w-full p-2 text-white uppercase font-bold rounded-lg"
           type="button"
@@ -29,11 +32,13 @@ export default function BudgetTracker() {
         >
           Reset
         </button>
-        <AmountDisplay label="Presupuesto" amount={state.budget} />
 
-        <AmountDisplay label="Disponible" amount={remainingBudget} />
-
-        <AmountDisplay label="Gastado" amount={totalExpenses} />
+        {/* Mostrar cantidades */}
+        <div className="space-y-4 sm:space-y-6">
+          <AmountDisplay label="Presupuesto" amount={state.budget} />
+          <AmountDisplay label="Disponible" amount={remainingBudget} />
+          <AmountDisplay label="Gastado" amount={totalExpenses} />
+        </div>
       </div>
     </div>
   )
